@@ -9,7 +9,7 @@
 # JUNIT TESTING, OOPS, CHARTS SCREENSHOTS 
 ![logo](https://logicmojo.com/assets/dist/new_pages/images/oops-concepts-in-java.jpg)  - ![UnitTesting](http://java4development.weebly.com/uploads/2/8/8/5/28851303/2809222.png)
 
-This Package Contains LS Commands & Pipe Commands Mimicked In Java. 
+This Package Contains JUNIT Testing in java as well as Java OOPs Concepts Program Implementation. 
 
 The codes for different applications like :
 #

@@ -14,6 +14,7 @@ import java.sql.*;
 import static MysqlJava.MySqlInsertion.con;
 import static MysqlJava.MySqlInsertion.logger;
 
+// CRUD OPERATIONS
 public class CRUD {
 
     // select("select * from ApiInfoBase");

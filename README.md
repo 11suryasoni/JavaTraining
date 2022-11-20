@@ -1,13 +1,13 @@
 
 ## Authors
 
- ![Logo](https://rossum.ai/use-cases/img/illust/softwares/azuga.png) 
+ ![Logo](https://www.bridgestoneamericas.com/content/dam/bscorpcomm-sites/bridgestone-americas/press/2021/bridgestone-acquires-azuga/bridgestone-azuga-logos.png)
 - [@SURYA_PRAKASH_SONI](https://github.com/11suryasoni)
 
 
 ###
-# JAVA PROJECT
-![logo](https://www.oracle.com/img/tech/cb88-java-logo-001.jpg)
+# JAVA, SPRINGBOOT, MYSQL, MONGODB PROJECT
+![logo](https://miro.medium.com/max/824/1*L-hZYgckffGhwM5Mom5YlA.png)
 
 ### Working with different technologies like Java, Spring, SpringBoot, Docker, Kubernetes, Jenkins, MySql, MongoDB, etc.
 

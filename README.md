@@ -9,12 +9,16 @@
 # JAVA PROJECT
 ![logo](https://www.oracle.com/img/tech/cb88-java-logo-001.jpg)
 
+### Working with different technologies like Java, Spring, SpringBoot, Docker, Kubernetes, Jenkins, MySql, MongoDB, etc.
+
 This Project Contains Linux Commands Mimicked In Java, 
 Linux Pipe, REST API & generate a CSV file, 
 Java File Handling & Generate an PDF report / HTML file / XML file
 , chart(s) for visualizing the data that 
 is fetched from the API, Java OOPs and Packaging, Zip and unzip,
 E-Mail form Java, Unit testing with Junit, JAR file.
+
+Advance Section : Docker Project, MONGODB-JAVA-CRUD, MYSQL-JAVA-CRUD, SpringBoot-Hibernate-Mysql, SpringBoot-Jpa-Hibernate-Mysql, Jenkins, etc. 
 
 The Project Azuga Training has codes for different applications like,
 #
@@ -49,6 +53,23 @@ Sending Generated reports via E-Mail through Java Program.
 - UNIT TESTING WITH JUNIT :
 ---> Generation of different Test Cases to Validate the Methods of Api and Pipe Programs.
 #
+
+- MYSQL CRUD : 
+---> MYSQL CRUD Operation from Java Program.
+#
+
+- MONGODB CRUD : 
+---> MONGODB CRUD Operation from Java Program.
+#
+
+- DOCKER & KUBERNETES, JENKINS: 
+---> Creating Java Program Image & Pushed Into Docker Hub, Minikube for Kubernetes & Jenkins.
+#
+
+- SPRING & SPRING-BOOT, SPRING DATA JPA, HIBERNATE : 
+---> SpringBoot Application Using Spring Data Jpa, Hibernate and SpringBoot Application Without Jpa Only Hibernate.
+#
+
 ###
 ## Installation
 
@@ -84,7 +105,7 @@ Install Necessary Jar's :-
     
 ```
 
-Links to jar's installation, Add these to the project's IDE's workspace.
+Links to jar's installation, Add these to the project's IDE's workspace & Extra Jar's are attatched with projects.
 ### 
 ### Prerequisites 
 
@@ -164,6 +185,24 @@ To run this project, you will need to add the following environment variables to
 | `api_key` | `string` | **Required**. Your API key |
 
 
+#### 
+#### ----------------------------------------------------------------------------------------------
+#### 
+
+## Sakila Structure (MySql API)
+
+
+#### Get all items
+
+```http
+  GET https://dev.mysql.com/doc/employee/en/sakila-structure.html
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `api_key` | `string` | **Required**. NO API key |
+
+
 #### .
 #### >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ###
@@ -178,6 +217,8 @@ Check out the `   API  Documentation ` for reference.
 [MUSEUM API - Documentation](https://metmuseum.github.io/)
 
 [CRYPTO API - Documentation](https://www.coingecko.com/en/api/documentation)
+
+[SAKILA STRUCTURE API - Documentation](https://dev.mysql.com/doc/employee/en/sakila-structure.html)
 
 #### -
 
@@ -220,7 +261,20 @@ Check out the `   JAVA PROJECT  Documentation ` for reference.
 - TASK 6 : UNIT TESTING WITH JUNIT
 
     -   --  [ TESTING ](https://github.com/11suryasoni/JavaTraining/tree/feature/JunitTesting)
-   
+- TASK 7 : MYSQL CRUD 
+
+    -   --  [ MUSEUM API ](https://github.com/11suryasoni/JavaTraining/tree/development/MYSQL-JAVA-CRUD)
+- TASK 8 : MONGODB CRUD 
+
+    -   --  [ MUSEUM API ](https://github.com/11suryasoni/JavaTraining/tree/development/MONGODB-JAVA-CRUD)   
+- TASK 9 : SPRINGBOOT APPLICATION USING SPRING DATA JPA - HIBERNATE, MYSQL
+
+    -   --  [SPRINGBOOT - SPRING DATA JPA - MUSEUM API ](https://github.com/11suryasoni/JavaTraining/tree/development/SpringBoot-Jpa-Hibernate-Mysql)    
+- TASK 10 : SPRINGBOOT APPLICATION USING HIBERNATE, MYSQL
+
+    -   --  [SPRINGBOOT - HIBERNATE - MUSEUM API ](https://github.com/11suryasoni/JavaTraining/tree/development/SpringBoot-Hibernate-Mysql)    
+ 
+ 
 #### .
 #### >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ### 

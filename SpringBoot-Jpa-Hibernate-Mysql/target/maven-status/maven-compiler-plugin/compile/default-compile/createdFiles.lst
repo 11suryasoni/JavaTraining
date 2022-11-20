@@ -1,0 +1,5 @@
+com/azuga/springbootmysql/entity/MuseumApi.class
+com/azuga/springbootmysql/controller/MuseumApiController.class
+com/azuga/springbootmysql/repository/MuseumApiRepository.class
+com/azuga/springbootmysql/service/MuseumApiService.class
+com/azuga/springbootmysql/SpringBootMysqlApplication.class

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<body style="text-align:left;" id="body">
+    <title>
+        Table
+    </title>
+    <h1 style="color:darkcyan;">
+        MUSEUM API - MONGO DB
+    </h1>
+
+    <p id="GFG_UP" style="font-size: 15px; font-weight: bold;">
+    </p>
+
+    <br><br>
+
+    <div id="formID">
+    </div>
+
+    <div id="div"></div>
+    <div>
+        <table style="border: 1 ;" align="center" id="table" border="5"></table>
+    </div>
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <h3 style="color: blue;">SEARCHING</h3>
+
+    <div>
+        <label for="Text ">Enter Title Field Text : </label>
+        <input type="text" id="Text" name="fname">
+
+        <button onclick="createTable('#table')">
+            View Table
+        </button>
+        <button onclick="handleSearch()">
+            Search
+        </button><br><br>
+        <!-- <button onclick="ManualRefresh()">
+            Relode
+        </button><br><br> -->
+
+        <h3 style="color: blue;">SORTING</h3>
+        <div style="position:relative;">
+            <label for="field">Enter Field Name :</label>
+            <input type="text" id="field" name="key name"><label> : </label>
+            <label for="order"> Enter Sorting Order:</label>
+            <input type="text" id="order" name="key Order">
+            <button onclick="handleSort()">
+                Sort
+            </button>
+        </div>
+    </div>
+
+
+    <button onclick="getData()">
+        Sort
+    </button><br><br>
+
+    <button class="page-link" id="prevButton">Prev</button><br><br>
+    <button class="page-link" id="nextButton">Next</button><br><br>
+
+    <script>
+
+        var response;
+        var arr = [];
+
+        var mainURL = "http://localhost:8080/MONGODB/webapi/myresource/find";
+        $.getJSON(mainURL, function (result) {
+            console.log("Inside the function");
+            console.log(result);
+            response = result;
+            for (i = 0; i < result.length; i++)
+                console.log(result[i]);
+        });
+
+        const pageSize = 5;
+        let curPage = 1;
+
+        async function renderTable(page = 1) {
+            await getData()
+
+            if (page == 1) {
+                prevButton.style.visibility = "hidden";
+            } else {
+                prevButton.style.visibility = "visible";
+            }
+
+            if (page == numPages()) {
+                nextButton.style.visibility = "hidden";
+            } else {
+                nextButton.style.visibility = "visible";
+            }
+
+            // create html
+            // var cryptoCoin = "";
+            // arr.filter((row, index) => {
+            //     let start = (curPage - 1) * pageSize;
+            //     let end = curPage * pageSize;
+            //     if (index >= start && index < end) return true;
+            // }).forEach(coin => {
+            //     cryptoCoin += "<tr>";
+            //     cryptoCoin += `<td> ${coin.objectID} </td>`;
+            //     cryptoCoin += `<td> ${coin.isHighlight} </td>`;
+            //     cryptoCoin += `<td> ${coin.accessionNumber} </td>`;
+            //     "<tr>";
+            // });
+            // document.getElementById("table").innerHTML = cryptoCoin;
+
+            selector='#table'
+            
+            var column = Headers(response, selector);
+            let insert = "";
+            let i=0;
+            arr.filter((row, index) => {
+                let start = (curPage - 1) * pageSize;
+                let end = curPage * pageSize;
+                if (index >= start && index < end) return true;
+            }).forEach(coin => {
+                i++;
+                j++;
+                var row = $('<tr/>');
+                for (var colIndex = 0; colIndex < column.length; colIndex++) {
+                    var val = response[j][column[colIndex]];
+                    if (val == null) val = "";
+                    row.append($('<td/>').html(val));
+                }
+                row.append($(`<td><button style=\"background-color:blue;border-color:blue;color:white;\" onClick=handleUpdate(${JSON.stringify(response[i]).replace(/\s+/g, '')})>Update</button><br><br>`
+                    + `<button style=\"background-color:red;border-color:red;color:white;\"  onClick=handleDelete(${JSON.stringify(response[i]).replace(/\s+/g, '')})>Delete</button><br><br>`));
+                insert = `<button onClick=handleInsert(${JSON.stringify(response[i]).replace(/\s+/g, '')})>Insert Data</button><br><br>`;
+                $(selector).append(row).html;
+            });
+            document.getElementById("div").innerHTML = insert;
+
+            
+        }
+let j=0;
+
+
+
+        function previousPage() {
+            if (curPage > 1) {
+                curPage--;
+                renderTable(curPage);
+            }
+        }
+
+        function nextPage() {
+            if ((curPage * pageSize) < arr.length) {
+                curPage++;
+                renderTable(curPage);
+            }
+
+        }
+
+
+        renderTable()
+
+        function numPages() {
+            return Math.ceil(arr.length / pageSize);
+        }
+
+        document.querySelector('#nextButton').addEventListener('click', nextPage, false);
+        document.querySelector('#prevButton').addEventListener('click', previousPage, false);
+
+        async function getData() {
+            const response = await fetch(mainURL)
+            const coins = await response.json()
+            arr = coins
+            console.log(arr)
+        }
+
+
+
+
+
+
+
+
+
+
+
+        function handleSearch() {
+
+            var val = document.getElementById("Text").value
+            var mainURL = "http://localhost:8080/MONGODB/webapi/myresource/search/" + val;
+            $.getJSON(mainURL, function (result) {
+                console.log("Inside the function");
+                console.log(result);
+                response = result;
+                for (i = 0; i < result.length; i++)
+                    console.log(result[i]);
+            });
+            alert(document.getElementById("Text").value)
+        }
+
+
+        function handleSort() {
+            var val1 = document.getElementById("field").value
+            var val2 = document.getElementById("order").value
+
+            var mainURL = "http://localhost:8080/MONGODB/webapi/myresource/sort/" + val1 + "/" + val2;
+            $.getJSON(mainURL, function (result) {
+                console.log("Inside the function");
+                console.log(result);
+                response = result;
+                for (i = 0; i < result.length; i++)
+                    console.log(result[i]);
+            });
+            alert(document.getElementById("field").value, document.getElementById("order").value)
+        }
+
+
+
+
+
+
+        function createTable(selector) {
+
+            var column = Headers(response, selector);
+            let insert = "";
+            for (var i = 0; i < response.length; i++) {
+                var row = $('<tr/>');
+                for (var colIndex = 0; colIndex < column.length; colIndex++) {
+                    var val = response[i][column[colIndex]];
+                    if (val == null) val = "";
+                    row.append($('<td/>').html(val));
+                }
+                row.append($(`<td><button style=\"background-color:blue;border-color:blue;color:white;\" onClick=handleUpdate(${JSON.stringify(response[i]).replace(/\s+/g, '')})>Update</button><br><br>`
+                    + `<button style=\"background-color:red;border-color:red;color:white;\"  onClick=handleDelete(${JSON.stringify(response[i]).replace(/\s+/g, '')})>Delete</button><br><br>`));
+                insert = `<button onClick=handleInsert(${JSON.stringify(response[i]).replace(/\s+/g, '')})>Insert Data</button><br><br>`;
+                $(selector).append(row).html;
+            }
+            document.getElementById("div").innerHTML = insert;
+
+        }
+
+
+        function Headers(myresult, selector) {
+            var columns = [];
+            var header = $('<tr/>');
+            for (var i = 0; i < myresult.length; i++) {
+                var row = myresult[i];
+                for (var k in row) {
+                    if ($.inArray(k, columns) == -1) {
+                        columns.push(k);
+                        header.append($('<th/>').html(k));
+                    }
+                }
+            }
+            header.append($('<th>Action</th>'));
+            $(selector).append(header);
+            return columns;
+        }
+
+
+    </script>
+    </head>
+
+    <body>
+
+        <div></div>
+
+    </body>
+
+</html>

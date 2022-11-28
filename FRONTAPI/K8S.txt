@@ -1,0 +1,171 @@
+brew install kubectl
+
+kubectl version --client
+
+kubectl cluster-info
+
+brew install minikube
+
+minikube status
+
+minikube start --driver=docker      // Selecting Docker as container manager driver
+
+minikube ip                         // Virtual server- K8s Node ip
+    192.168.49.2
+
+
+
+minikube ssh                        // Inside of K8s Node
+
+
+docker ps                           // All running docker container
+
+kubectl                             // Not available inside of K8s Node
+
+exit                                // Closing ssh connection
+
+
+
+kubectl cluster-info                // Cluster Info.
+
+kubectl get nodes                   // List cluster nodes
+
+kubectl get pods                    // List pods in this cluster - See only default namespace pods.
+
+kubectl get namespaces              // List namespaces available - namespaces is to group resources and diff configuration objects.
+
+kubectl get pods --namespace=kube-system        // List particular namespace pods
+
+
+kubectl run helloworld --image=myhello-world:3.0    // Creating Pod helloworld by pulling my image from local
+
+kubectl get pods   
+
+kubectl delete pod helloworld
+
+kubectl describe pod helloworld
+
+
+
+kubectl create deployment helloworld --image=latest
+
+
+
+docker tag myhello-world:3.0 surya11soni/repo1
+docker push surya11soni/repo1:latest  
+
+
+// docker tag local-image:tagname new-repo:tagname
+// docker push new-repo:tagname
+
+
+kubectl logs helloworld-67b47ccc46-rnr5c 
+
+
+kubectl describe pods 
+
+kubectl proxy
+
+kubectl get services
+
+
+
+
+
+kubectl expose deployment/helloworld --type="NodePort" --port 8080
+
+
+export NODE_PORT=$(kubectl get services/helloworld -o go-template='{{(index .spec.ports 0).nodePort}}')
+echo NODE_PORT=$NODE_PORT
+
+curl 192.168.49.2:32441
+
+
+kubectl expose deployment helloworld --type=NodePort --port=8080
+
+
+
+
+
+kubectl get deployments
+
+kubectl describe deployment  helloworld 
+
+kubectl get pods
+
+kubectl describe pod helloworld-67b47ccc46-rnr5c
+
+kubectl get pods -o wide
+
+curl 172.17.0.3                 // Inside of node it works
+
+
+kubectl expose deployment helloworld --port=8080 --target-port=80
+
+curl 10.107.253.203:8080        // Cluster IP from inside 
+
+kubectl describe service helloworld   
+
+
+
+
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodeapp-deployment
+  labels:
+    app: nodeapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodeapp
+  template:
+    metadata:
+      labels:
+        app: nodeapp 
+    spec:
+      containers:
+      - name: nodeserver
+        image: lokanathloki/nodeapp:latest
+        ports:
+        - containerPort: 3000
+
+
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeapp-service
+spec:
+  selector:
+    app: nodeapp 
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 3000
+    nodePort: 31110
+
+
+
+    kubectl apply -f deployment.yml
+
+    kubectl apply -f service.yml
+
+    kubectl get Service
+    
+    minikube service nodeapp-service --url 
+
+
+
+
+
+kubectl expose deployment nodeapp-deployment --type=NodePort --port=80
+
+kubectl get svc
+
+minikube service nodeapp-deployement 

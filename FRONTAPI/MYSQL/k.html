@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<body style="text-align:center;" id="body">
+    <title>
+        Table
+    </title>
+    <h1>
+        Table
+    </h1>
+    <button onclick="showAllContent('#table')">
+        click here to View table
+    </button>
+
+    <br><br>
+
+    <table align="center" id="table" border="1"></table>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        var response;
+
+        var baseURL = "http://localhost:8080/RestApp/webapi/azuga";
+        $.getJSON(baseURL, function (result) {
+            console.log("Inside the function");
+            console.log(result);
+            response = result;
+            for (i = 0; i < result.length; i++)
+                console.log(result[i]);
+        });
+
+        function handleDelete(data){
+            let id = "";
+            Object.entries(data).forEach(([key,value])=>{
+                
+                if(key == "objectID"){
+                    id = value;
+                }
+            
+        });fetch("http://localhost:8080/RestApp/webapi/azuga/delete/"+id, {
+  method: "DELETE",
+  mode:"cors"
+}).then(response => response.text()).then(data=>alert(data)).catch(err=>{console.log(err)});
+}
+        function handleDelete(data){
+            
+        }
+        
+        function showAllContent(selector) {
+            var column = Headers(response, selector);
+
+            for (var i = 0; i < response.length; i++) {
+                var row = $('<tr/>');
+                for (var colIndex = 0; colIndex < column.length; colIndex++) {
+                    var val = response[i][column[colIndex]];
+                    if (val == null) val = "";
+                    row.append($('<td/>').html(val));
+                }
+                row.append($(`<td><button style=\"background-color:blue;border-color:blue;color:white;\"  onClick=handleUpdate(${JSON.stringify(response[i]).replace(/\s+/g, '')})>Update</button>`
+                    +`<button style=\"background-color:red;border-color:red;color:white;\"  onClick=handleDelete(${JSON.stringify(response[i]).replace(/\s+/g, '')})>Delete</button>`));
+                $(selector).append(row);
+            }
+        }
+
+        function Headers(myresult, selector) {
+            var columns = [];
+            var header = $('<tr/>');
+            for (var i = 0; i < myresult.length; i++) {
+                var row = myresult[i];
+                for (var k in row) {
+                    if ($.inArray(k, columns) == -1) {
+                        columns.push(k);
+                        header.append($('<th/>').html(k));
+                    }
+                }
+            }
+            header.append($('<td>Action</td>'));
+            $(selector).append(header);
+            return columns;
+        }
+        
+    </script>
+    </head>
+
+    <body>
+
+        <div></div>
+
+    </body>
+
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<body>
+    <script>
+        var myresult;
+
+        var staticUrl = "http://localhost:8080/RESTAPP/webapi/myresource/read/ApiInfoBase";
+        $.getJSON(staticUrl, function (result) {
+            console.log("Inside the function");
+            console.log(result);
+            myresult = result;
+            for (i = 0; i < result.length; i++)
+                console.log(result[i]);
+        });
+
+    </script>
+
+    <div id="res" class="alert"></div>
+    <form></form>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsonform/2.2.5/jsonform.js"></script>
+    <script type="text/javascript">
+
+        var myresult;
+
+        var staticUrl = "http://localhost:8080/RESTAPP/webapi/myresource/read/ApiInfoBase";
+        $.getJSON(staticUrl, function (result) {
+            console.log("Inside the function");
+            console.log(result);
+            myresult = result;
+            for (i = 0; i < result.length; i++)
+                console.log(result[i]);
+        });
+
+        $('form').jsonForm({
+            schema: {
+
+                "objectId": {
+                    "type": "string"
+                },
+                "isHighlight": {
+                    "type": "string"
+                },
+                "accessionNumber": {
+                    "type": "string"
+                },
+                "accessionYear": {
+                    "type": "string"
+                },
+                "isPublicDomain": {
+                    "type": "string"
+                },
+                "primaryImage": {
+                    "type": "string"
+                },
+                "primaryImageSmall": {
+                    "type": "string"
+                },
+                "additionalImages": {
+                    "type": "string"
+                },
+                "constituents": {
+                    "type": "string"
+                },
+                "department": {
+                    "type": "string"
+                },
+                "objectName": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "culture": {
+                    "type": "string"
+                },
+                "period": {
+                    "type": "string"
+                },
+                "dynasty": {
+                    "type": "string"
+                },
+                "reign": {
+                    "type": "string"
+                },
+                "portfolio": {
+                    "type": "string"
+                },
+                "artistRole": {
+                    "type": "string"
+                },
+                "artistPrefix": {
+                    "type": "string"
+                },
+                "artistDisplayName": {
+                    "type": "string"
+                },
+                "artistDisplayBio": {
+                    "type": "string"
+                },
+                "artistSuffix": {
+                    "type": "string"
+                },
+                "artistAlphaSort": {
+                    "type": "string"
+                },
+                "artistNationality": {
+                    "type": "string"
+                },
+                "artistBeginDate": {
+                    "type": "string"
+                },
+                "artistEndDate": {
+                    "type": "string"
+                },
+                "artistGender": {
+                    "type": "string"
+                },
+                "artistWikidata_URL": {
+                    "type": "string"
+                },
+                "artistULAN_URL": {
+                    "type": "string"
+                },
+                "objectDate": {
+                    "type": "string"
+                },
+                "objectBeginDate": {
+                    "type": "string"
+                },
+                "objectEndDate": {
+                    "type": "string"
+                },
+                "medium": {
+                    "type": "string"
+                },
+                "dimensions": {
+                    "type": "string"
+                },
+                "measurements": {
+                    "type": "string"
+                },
+                "creditLine": {
+                    "type": "string"
+                },
+                "geographyType": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "county": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "subregion": {
+                    "type": "string"
+                },
+                "locale": {
+                    "type": "string"
+                },
+                "locus": {
+                    "type": "string"
+                },
+                "excavation": {
+                    "type": "string"
+                },
+                "river": {
+                    "type": "string"
+                },
+                "classification": {
+                    "type": "string"
+                },
+                "rightsAndReproduction": {
+                    "type": "string"
+                },
+                "linkResource": {
+                    "type": "string"
+                },
+                "metadataDate": {
+                    "type": "string"
+                },
+                "repository": {
+                    "type": "string"
+                },
+                "objectURL": {
+                    "type": "string"
+                },
+                "tags": {
+                    "type": "string"
+                },
+                "objectWikidata_URL": {
+                    "type": "string"
+                },
+                "isTimelineWork": {
+                    "type": "string"
+                },
+                "GalleryNumber": {
+                    "type": "string"
+                }
+            },
+            onSubmit: function (errors, values) {
+                if (errors) {
+                    $('#res').html('<p>I beg your pardon?</p>');
+                }
+                else {          
+
+                    let jsonString = "{";
+                    Object.entries(values).forEach(([key, val]) => {
+                        jsonString += `"${key}":"${val}",`;
+                    });
+                    jsonString += "}";
+                    let json = jsonString.replace(",}", "}");
+                    console.log(json);
+                    alert(json);
+                    fetch("http://localhost:8080/RESTAPP/webapi/myresource/update/objectId=" + values.objectId, {
+                        method: "PUT",
+                        mode: "cors",
+                        Headers: {
+                            'Content-Type': 'text/plain'
+                        },
+                        body: json
+                    }).then(data => console.log(data)).catch((err) => console.log(err));
+                    alert("update successfull");
+                }
+            }
+        });
+
+    </script>
+
+
+
+    <!-- <form id="formElem">
+        <label for="">objectId</label><br>
+        <input type="text" id='obj' name="name" value=""><br><br>
+        <label for="">isHighlight</label><br>
+        <input type="text" id="isHighlight" name="name" value=""><br><br>
+        <label for="">accessionNumber</label><br>
+        <input type="text" id="accessionNumber" name="surname" value=""><br><br>
+        <label for="">accessionYear</label><br>
+        <input type="text" id="accessionYear" name="surname" value=""><br><br>
+        <label for="button">Click Me</label><br>
+        <input type="submit" id='button'>
+    </form> -->
+    <script>
+
+        // formElem.onsubmit = async (e) => {
+        //     myPrint('formElem')
+
+        //     // e.preventDefault();
+        //     // alert(result.message);
+        //     // // let response = await fetch('/article/formdata/post/user', {
+        //     // //     method: 'POST',
+        //     // //     body: new FormData(formElem)
+        //     // // });
+        //     // let result = await response.json();
+
+        //     // alert(result.message);
+        // };
+        // function myPrint(myfrm) {
+        //     var originalvalue = document.getElementById("obj").value;
+        //     alert(originalvalue)
+        // }
+    </script>
+</body>
+
+</html>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">

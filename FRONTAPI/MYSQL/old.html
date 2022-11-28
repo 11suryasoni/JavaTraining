@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<body style="text-align:center;" id="body">
+
+    <h1 style="color:darkcyan;">
+        MUSEUM API
+    </h1>
+
+    <p id="GFG_UP" style="font-size: 15px; font-weight: bold;">
+    </p>
+
+    <button onclick="constructTable('#table')">
+        click here to View table
+    </button>
+
+
+    <br><br>
+
+    <table align="center" id="table" border="1">
+    </table>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+
+
+        var myresult;
+
+        var staticUrl = "http://localhost:8080/RESTAPP/webapi/myresource/read/ApiInfoBase";
+        $.getJSON(staticUrl, function (result) {
+            console.log("Inside the function");
+            console.log(result);
+            myresult = result;
+            for (i = 0; i < result.length; i++)
+                console.log(result[i]);
+        });
+
+
+        function constructTable(selector) {
+
+            // Getting the all column names
+            var cols = Headers(myresult, selector);
+
+            // Traversing the JSON data
+            for (var i = 0; i < myresult.length; i++) {
+                var row = $('<tr/>');
+                for (var colIndex = 0; colIndex < cols.length; colIndex++) {
+                    var val = myresult[i][cols[colIndex]];
+
+                    // If there is any key, which is matching
+                    // with the column name
+                    if (val == null) val = "";
+                    row.append($('<td/>').html(val));
+                }
+
+                row.append($(`<td><button style=\"background-color:blue;border-color:blue;color:white;\"  onClick=handleUpdate(${JSON.stringify(myresult[i]).replace(/\s+/g, '')})>Update</button>`
+                    + `<button style=\"background-color:red;border-color:red;color:white;\"  onClick=handleDelete(${JSON.stringify(myresult[i]).replace(/\s+/g, '')})>Delete</button>`));
+                // Adding each row to the table
+                $(selector).append(row);
+            }
+        }
+
+        function Headers(myresult, selector) {
+            var columns = [];
+            var header = $('<tr/>');
+
+            for (var i = 0; i < myresult.length; i++) {
+                var row = myresult[i];
+
+                for (var k in row) {
+                    if ($.inArray(k, columns) == -1) {
+                        columns.push(k);
+
+                        // Creating the header
+                        header.append($('<th/>').html(k));
+                    }
+                }
+            }
+            header.append($('<td>Action</td>'));
+            // Appending the header to the table
+            $(selector).append(header);
+            return columns;
+        }
+
+
+        function handleDelete(data) {
+            let id = "";
+            Object.entries(data).forEach(([key, value]) => {
+
+                if (key == "objectId") {
+                    id = value;
+                }
+
+            });
+            fetch("http://localhost:8080/RESTAPP/webapi/myresource/delete/" + id, {
+                method: "DELETE",
+                mode: "cors"
+            }).then(myresult => myresult.text()).then(data => alert(data)).catch(err => { console.log(err) });
+        }
+
+        function handleUpdate(data) {
+            // localStorage.setItem(JSON.stringify('obj',myresult));
+            // window.loaction.href = "nextPage.html" + data
+
+            location.href = "nextPage.html"
+        }
+
+
+    </script>
+
+    </head>
+
+    <body>
+
+        <div></div>
+
+    </body>
+
+</html>
